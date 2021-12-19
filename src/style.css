@@ -67,9 +67,9 @@ body {
   align-items: center;
 }
 
-.workplace-form h3 {
+.workplace-form h2 {
   color: white;
-  font-size: x-large;
+  margin: 0.5em;
 }
 
 #workplace-form-title,
@@ -100,8 +100,6 @@ body {
 /*display of workplaces */
 .class-display {
   width: 80%;
-  display: flex; /*getting rid of flex allows for growing the box */
-  flex-direction: column;
   gap: 1em;
   padding: 1em;
   overflow-y: scroll;
@@ -110,34 +108,48 @@ body {
 /*individual workplaces */
 .workplace-display {
   min-height: 50%;
-  /*margin: 1em; if no flex*/
+  margin: 1em;
   border: 1.5px solid black;
   border-radius: 0.5em;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1em;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
+  padding: 1em;
 }
 
 /*button adding to do in workplace display */
 .btn-add-todo {
-  width: 20%;
-  height: 10%;
+  width: 10%;
+  height: auto;
+  padding: 0.5em;
 }
 
 /* to do card inside each workplace*/
 .todo-display {
-  background-color: white;
+  background-color: #757BC8;
   height: 75%;
   width: 20%;
   border: 2px solid black;
-  border-radius: 1em;
+  border-radius: 0.3em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  padding: 1em;
+  color: white;
+}
 
+.todo-display p {
+  text-align: center;
+  inline-size: 150px;
+  overflow-wrap: break-word;
+}
+
+.todo-display button:hover{
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 /* inside to do cards */
@@ -148,23 +160,73 @@ body {
   padding: 1em;
 }
 
-
-
 /*form for to-dos*/
-.form-to-do {
+
+.form-div {
   position: fixed;
   z-index: 1;
   top: 50%;
   left: 50%;
-  width: 300px;
+  height: 60%;
+  width: 20%;
   padding: 40px;
-  border: 2px solid;
+  border: 2px solid rgba(255, 255, 255, 0.678);
   border-radius: 8px;
-  background-color: gray;
+  background-color: #60616e;
   text-align: center;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-add-to-do {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-add-to-do input,
+.form-add-to-do textarea {
+  height: 2.5em;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  color: black;
+  font-size: 18px;
+}
+#text-description {
+  height: 150px;
+  width: 250px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.form-add-to-do input::placeholder,
+.form-add-to-do textarea::placeholder {
+  color: black;
+}
+
+.form-add-to-do textarea,
+.form-add-to-do textarea::placeholder {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.form-add-to-do button {
+  border: 0;
+  background-color: white;
+  padding: 1em;
+  border-radius: 10px;
+  width: 100px;
+}
+
+.form-add-to-do button:hover {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* scrollbars */

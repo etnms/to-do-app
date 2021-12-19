@@ -23,7 +23,7 @@ const addFunctionsToButtons = () => {
 };
 
 const submitBtn = document.querySelector("#submit-btn");
-submitBtn.addEventListener("click", () => createToDoUI(btnName));
+submitBtn.addEventListener("click", () => createToDoUI(btnName, Math.floor(Math.random() * 100000)));
 
 let btnName;
 function getNameOfBtn(name) {

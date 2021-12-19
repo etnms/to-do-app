@@ -1,5 +1,5 @@
 import { addFunctionsToButtons } from "./index.js";
-import { createWorkplaceUi } from "./todo-ui.js";
+import { createWorkplaceUi, moreUi } from "./todo-ui.js";
 
 let workplaceArray = [];
 
@@ -33,13 +33,17 @@ function loadLocalStorage() {
   if (workplaceLoaded) {
     workplaceLoaded.forEach((element) => {
       workplaceArray.push(element);
-      createWorkplaceUi(element.workplaceName);
-      addFunctionsToButtons();
+      createWorkplaceUi(element.workplaceName); 
+      element.arrayForToDos.forEach(x => { 
+        moreUi(x.title, x.description, x.priority,element.workplaceName,x.id)})
+        
     });
+    addFunctionsToButtons();
   } else {
     workplaceArray = [];
   }
 }
+
 //reset the list for debugging purposes
 function reset(){
   workplaceArray = [];

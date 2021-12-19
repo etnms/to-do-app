@@ -9,13 +9,15 @@ function ToDoItem(title, description, priority, id) {
 
 function createTodo(title, description, priority, name, id) {
   const newToDoFile = new ToDoItem(title, description, priority, id);
-  workplaceArray.forEach((element) => {z
+  workplaceArray.forEach((element) => {
+    
     if (element.workplaceName === name)
       workplaceArray[workplaceArray.indexOf(element)].arrayForToDos.push(
         newToDoFile
       );
   });
   closeForm();
+  saveLocalStorage();
 }
 
 function removeTodo(name) {
@@ -27,35 +29,35 @@ function removeTodo(name) {
   let toDoToRemove = document.querySelector(`#${name}`);
   let tempWorkplaceName = toDoToRemove.parentElement.id.split("-"); //need to slice to get only last part of the name
   tempWorkplaceName = tempWorkplaceName[tempWorkplaceName.length - 1];
-
   //removing from divs
   toDoToRemove.remove();
-
   //removing from array by looping through each to get the position and then removing it
   workplaceArray.forEach((element) => {
     element.arrayForToDos.forEach((x) => {
       //multiple foreach to get into the 2 different arrays
       if (x.id.toString() === idToDo) {
         //for loop in order to get the name of workplacearray, necessary to delete inside correct array
-        for (let i = 0; i < workplaceArray.length; i++)
+        for (let i = 0; i < workplaceArray.length; i++){
           if (workplaceArray[i].workplaceName === tempWorkplaceName) {
             workplaceArray[i].arrayForToDos.splice(
-              workplaceArray.indexOf(element),
+              element.arrayForToDos.indexOf(x),
               1
             );
+            saveLocalStorage();
             return;
           }
       }
+    }
     });
   });
-  saveLocalStorage();
+
 }
 
 //modify to do
 function modifyToDo() {}
 
 //opening and closing the form to put to-do info
-const form = document.querySelector(".form-to-do");
+const form = document.querySelector(".form-div");
 const btnCloseForm = document.querySelector("#close-form");
 btnCloseForm.addEventListener("click", closeForm);
 

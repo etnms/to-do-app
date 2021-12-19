@@ -11,7 +11,7 @@
   <body>
     <div class="main">
       <div class="workplace-form">
-          <h3>Create a new workplace</h3>
+          <h2>Create a new workplace</h2>
           <input type="text" id="workplace-form-title" placeholder="Workplace title"/></form> <br>
 
           <button class="btn-add-workplace">Add</button>
@@ -19,13 +19,13 @@
       <div class="class-display"></div>
     </div>
 
-    <div class="form-to-do" >
-      <form>
+    <div class="form-div" >
+      <form class="form-add-to-do">
         <input type="text" id="text-title" placeholder="Title" /><br />
-        <input type="text" id="text-description" placeholder="Description" /><br />
+        <textarea  id="text-description" placeholder="Description"></textarea><br />
         <input type="text" id="text-priority" placeholder="Priority" /><br />
-        <button type="button" id="submit-btn" >Add to do</button><br>
-        <input type="button" id="close-form" value="Close">
+        <button type="button" id="submit-btn">Add to do</button><br>
+        <button type="button" id="close-form">Close</button>
       </form>
     </div>
   </body>

@@ -1,4 +1,5 @@
 import { createTodo, removeTodo } from "./todo";
+import { workplaceArray } from "./workplace";
 
 const classDisplay = document.querySelector(".class-display");
 
@@ -17,17 +18,17 @@ function createWorkplaceUi(name) {
 }
 
 //create the to do display
-function createToDoUI(name) {
+function createToDoUI(name, rdn) {
   let currentToDo = document.querySelector(`#${name}`); 
   let nameForArray = name.split("-");
-  let rdn = Math.floor(Math.random() * 100000);
+  //rdn
+  const title = document.querySelector("#text-title").value;
+  const description = document.querySelector("#text-description").value;
+  const priority = document.querySelector("#text-priority").value;
   const toDo = document.createElement("div");
   toDo.classList = "todo-display";
   toDo.setAttribute("id", `todo-item-${rdn}`);
   //creating the content of the to dos
-  const title = document.querySelector("#text-title").value;
-  const description = document.querySelector("#text-description").value;
-  const priority = document.querySelector("#text-priority").value;
   createTodo(title,description, priority,nameForArray[nameForArray.length - 1], rdn);
   
   //creating and appending all the elements of a to do
@@ -46,11 +47,38 @@ function createToDoUI(name) {
   btnRemove.classList = "btn-remove";
   btnRemove.textContent = "Remove";
   toDo.append(btnRemove);
-  btnRemove.addEventListener("click", () => removeTodo(btnRemove.parentElement.id));
-  console.log(btnRemove.parentElement);
-  
+  btnRemove.addEventListener("click", () => removeTodo(btnRemove.parentElement.id));  
   currentToDo.append(toDo);
 }
 
+function moreUi(titleTodo, descriptionTodo, priorityTodo, name, rdn){
+  let currentToDo = document.querySelector(`#workplace-display-${name}`); 
+  const toDo = document.createElement("div");
+  toDo.classList = "todo-display";
+  toDo.setAttribute("id", `todo-item-${rdn}`);
+  //creating the content of the to dos
+  const title = titleTodo;
+  const description = descriptionTodo;
+  const priority = priorityTodo;
+    
+  //creating and appending all the elements of a to do
+  let titleText = document.createElement("p");
+  titleText.textContent = title;
+  let descriptionText = document.createElement("p");
+  descriptionText.textContent = description;
+  let priorityText = document.createElement("p");
+  priorityText.textContent = priority;
+  toDo.append(titleText);
+  toDo.append(descriptionText);
+  toDo.append(priorityText);
 
-export { createWorkplaceUi, createToDoUI };
+  //create the remove button inside the todos
+  let btnRemove = document.createElement("button");
+  btnRemove.classList = "btn-remove";
+  btnRemove.textContent = "Remove";
+  toDo.append(btnRemove);
+  btnRemove.addEventListener("click", () => {removeTodo(btnRemove.parentElement.id); });  
+  currentToDo.append(toDo);
+}
+
+export { createWorkplaceUi, createToDoUI, moreUi };

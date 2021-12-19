@@ -1,0 +1,236 @@
+/*main displays - general*/
+body {
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background: hsla(236, 43%, 62%, 1);
+
+  background: linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#757bc8", endColorstr="#8187dc", GradientType=1 );
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+}
+
+/*Workplace form styling*/
+.workplace-form {
+  width: 20%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workplace-form h3 {
+  color: white;
+  font-size: x-large;
+}
+
+#workplace-form-title,
+.btn-add-workplace,
+.btn-add-todo {
+  border-radius: 2rem;
+  width: 50%;
+  border: 0;
+  height: 5%;
+  margin: 1rem;
+  text-align: center;
+  background-color: white;
+}
+
+.btn-add-workplace:hover,
+.btn-add-todo:hover {
+  background-color: rgba(255, 255, 255, 0.685);
+}
+#workplace-form-title {
+  width: 80%;
+  /*may want to add border-right*/
+}
+
+:placeholder-shown {
+  font-style: italic;
+}
+
+/*display of workplaces */
+.class-display {
+  width: 80%;
+  display: flex; /*getting rid of flex allows for growing the box */
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  overflow-y: scroll;
+}
+
+/*individual workplaces */
+.workplace-display {
+  min-height: 50%;
+  /*margin: 1em; if no flex*/
+  border: 1.5px solid black;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap; 
+}
+
+/*button adding to do in workplace display */
+.btn-add-todo {
+  width: 20%;
+  height: 10%;
+}
+
+/* to do card inside each workplace*/
+.todo-display {
+  background-color: white;
+  height: 75%;
+  width: 20%;
+  border: 2px solid black;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* inside to do cards */
+.btn-remove {
+  border-radius: 0.3em;
+  border: 0;
+  text-align: center;
+  padding: 1em;
+}
+
+
+
+/*form for to-dos*/
+.form-to-do {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  padding: 40px;
+  border: 2px solid;
+  border-radius: 8px;
+  background-color: gray;
+  text-align: center;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  color: white;
+}
+
+/* scrollbars */
+/* width */
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsla(236, 43%, 62%, 1);
+
+  background: linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    270deg,
+    hsla(236, 43%, 62%, 1) 0%,
+    hsla(236, 57%, 68%, 1) 11.11111111111111%,
+    hsla(236, 79%, 75%, 1) 22.22222222222222%,
+    hsla(239, 100%, 81%, 1) 33.33333333333333%,
+    hsla(244, 100%, 83%, 1) 44.44444444444444%,
+    hsla(250, 100%, 84%, 1) 55.55555555555556%,
+    hsla(260, 97%, 85%, 1) 66.66666666666666%,
+    hsla(271, 92%, 85%, 1) 77.77777777777777%,
+    hsla(270, 91%, 86%, 1) 88.88888888888889%,
+    hsla(271, 90%, 88%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#757bc8", endColorstr="#8187dc", GradientType=1 );
+
+  margin: 0.2em;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.7);
+  border-radius: 1em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(136, 136, 136);
+}

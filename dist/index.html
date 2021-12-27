@@ -9,23 +9,33 @@
     <title>To Do app</title>
   </head>
   <body>
-    <div class="main">
+    <main class="main">
       <div class="workplace-form">
-          <h2>Create a new workplace</h2>
+          <h1>Create a new workplace</h1>
           <input type="text" id="workplace-form-title" placeholder="Workplace title"/></form> <br>
 
           <button class="btn-add-workplace">Add</button>
       </div>
       <div class="class-display"></div>
-    </div>
+    </main>
 
     <div class="form-div" >
       <form class="form-add-to-do">
-        <input type="text" id="text-title" placeholder="Title" /><br />
-        <textarea  id="text-description" placeholder="Description"></textarea><br />
-        <input type="text" id="text-priority" placeholder="Priority" /><br />
-        <button type="button" id="submit-btn">Add to do</button><br>
-        <button type="button" id="close-form">Close</button>
+        <input type="text" class="text-title" placeholder="Title" /><br />
+        <textarea  class="text-description" placeholder="Description"></textarea><br />
+        <input type="text" class="text-priority" placeholder="Priority" /><br />
+        <button type="button" class="submit-btn">Add to do</button><br>
+        <button type="button" class="close-form">Close</button>
+      </form>
+    </div>
+
+    <div class="form-div modify-form" >
+      <form class="form-modify-to-do">
+        <input type="text" class="modify-text-title" placeholder="Title" /><br />
+        <textarea  class="modify-text-description" placeholder="Description"></textarea><br />
+        <input type="text" class="modify-text-priority" placeholder="Priority" /><br />
+        <button type="button" class="modify-submit-btn">Modify</button><br>
+        <button type="button" class="modify-close-form">Close</button>
       </form>
     </div>
   </body>

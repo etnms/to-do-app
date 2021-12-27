@@ -1,4 +1,7 @@
-import { workplaceArray, saveLocalStorage } from "./workplace";
+import { workplaceArray, saveLocalStorage} from "./workplace";
+
+//needs a big old cleaning
+
 
 function ToDoItem(title, description, priority, id) {
   this.title = title;
@@ -10,7 +13,6 @@ function ToDoItem(title, description, priority, id) {
 function createTodo(title, description, priority, name, id) {
   const newToDoFile = new ToDoItem(title, description, priority, id);
   workplaceArray.forEach((element) => {
-    
     if (element.workplaceName === name)
       workplaceArray[workplaceArray.indexOf(element)].arrayForToDos.push(
         newToDoFile
@@ -29,15 +31,17 @@ function removeTodo(name) {
   let toDoToRemove = document.querySelector(`#${name}`);
   let tempWorkplaceName = toDoToRemove.parentElement.id.split("-"); //need to slice to get only last part of the name
   tempWorkplaceName = tempWorkplaceName[tempWorkplaceName.length - 1];
+
   //removing from divs
   toDoToRemove.remove();
+
   //removing from array by looping through each to get the position and then removing it
   workplaceArray.forEach((element) => {
     element.arrayForToDos.forEach((x) => {
       //multiple foreach to get into the 2 different arrays
       if (x.id.toString() === idToDo) {
         //for loop in order to get the name of workplacearray, necessary to delete inside correct array
-        for (let i = 0; i < workplaceArray.length; i++){
+        for (let i = 0; i < workplaceArray.length; i++) {
           if (workplaceArray[i].workplaceName === tempWorkplaceName) {
             workplaceArray[i].arrayForToDos.splice(
               element.arrayForToDos.indexOf(x),
@@ -46,19 +50,71 @@ function removeTodo(name) {
             saveLocalStorage();
             return;
           }
+        }
       }
-    }
     });
   });
-
 }
 
 //modify to do
-function modifyToDo() {}
+function modifyToDo(name) {
+  const formModify = document.querySelector(".modify-form");
+  formModify.style.cssText = "transform: translate(-50%, -50%) scale(1)";
+  const btnCloseForm = document.querySelector(".modify-close-form");
+  btnCloseForm.addEventListener("click", closeModifyForm);
+  function closeModifyForm() {
+    formModify.style.cssText = "transform: translate(-50%, -50%) scale(0)";
+  }
+
+  const modifiedTitle = document.querySelector(".modify-text-title");
+  const modifiedDescription = document.querySelector(".modify-text-description");
+  const modifiedPriority = document.querySelector(".modify-text-priority");
+  //declare todo names
+  let idToDo = name.split("-");
+  idToDo = idToDo[idToDo.length - 1];
+
+  //get workplacename
+  let toDoToModify = document.querySelector(`#${name}`);
+  let tempWorkplaceName = toDoToModify.parentElement.id.split("-"); //need to slice to get only last part of the name
+  tempWorkplaceName = tempWorkplaceName[tempWorkplaceName.length - 1];
+
+  workplaceArray.forEach((element) => {
+    element.arrayForToDos.forEach((x) => {
+      //multiple foreach to get into the 2 different arrays
+      if (x.id.toString() === idToDo) {
+        //for loop in order to get the name of workplacearray, necessary to delete inside correct array
+        modifiedTitle.value = x.title;
+        modifiedDescription.value = x.description;
+        modifiedPriority.value = x.priority;
+      }
+    });
+  });
+
+  const modifySubmitBtn = document.querySelector(".modify-submit-btn");
+  modifySubmitBtn.addEventListener("click", () => {modifyInArray(), closeModifyForm()});
+  function modifyInArray() {
+    workplaceArray.forEach((element) => {
+      element.arrayForToDos.forEach((x) => {
+        //multiple foreach to get into the 2 different arrays
+        if (x.id.toString() === idToDo) {
+          //for loop in order to get the name of workplacearray, necessary to delete inside correct array
+          x.title = document.querySelector(".modify-text-title").value; 
+          x.description = document.querySelector(".modify-text-description").value; 
+          x.priority = document.querySelector(".modify-text-priority").value; 
+          toDoToModify.childNodes[0].textContent =  document.querySelector(".modify-text-title").value;
+          toDoToModify.childNodes[1].textContent =  document.querySelector(".modify-text-description").value;
+          toDoToModify.childNodes[2].textContent =  document.querySelector(".modify-text-priority").value;
+          saveLocalStorage();
+            return;
+        }
+      });
+    });
+  }
+}
 
 //opening and closing the form to put to-do info
 const form = document.querySelector(".form-div");
-const btnCloseForm = document.querySelector("#close-form");
+const btnCloseForm = document.querySelector(".close-form");
 btnCloseForm.addEventListener("click", closeForm);
 
 function openForm() {
@@ -69,4 +125,4 @@ function closeForm() {
   form.style.cssText = "transform: translate(-50%, -50%) scale(0)";
 }
 
-export { createTodo, removeTodo, openForm };
+export { createTodo, removeTodo, openForm, modifyToDo };

@@ -1,5 +1,5 @@
 import { addFunctionsToButtons } from "./index.js";
-import { createWorkplaceUi, moreUi } from "./todo-ui.js";
+import { createWorkplaceUi, ToDoUI } from "./todo-ui.js";
 
 let workplaceArray = [];
 
@@ -9,7 +9,7 @@ function workplace(workplaceName, arrayForToDos) {
 }
 
 function workplaceName(name) {
-  //need to see how can check  is array already contains an element with this name
+  //need to see if array already contains an element with this name
   if (name != "") {
     let arrayForToDos = [];
     const newWorkPlace = new workplace(name, arrayForToDos);
@@ -23,11 +23,10 @@ function workplaceName(name) {
 }
 
 //local storage
-//saving
 function saveLocalStorage() {
   localStorage.setItem("workplaces", JSON.stringify(workplaceArray));
 }
-//retrieving
+
 function loadLocalStorage() {
   let workplaceLoaded = JSON.parse(localStorage.getItem("workplaces"));
   if (workplaceLoaded) {
@@ -35,7 +34,7 @@ function loadLocalStorage() {
       workplaceArray.push(element);
       createWorkplaceUi(element.workplaceName); 
       element.arrayForToDos.forEach(x => { 
-        moreUi(x.title, x.description, x.priority,element.workplaceName,x.id)})
+        ToDoUI(x.title, x.description, x.priority,element.workplaceName,x.id)})
         
     });
     addFunctionsToButtons();

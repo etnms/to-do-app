@@ -10,7 +10,7 @@ function ToDoItem(title, description, priority, id) {
   this.id = id;
 }
 
-function createTodo(title, description, priority, name, id) {
+const createTodo = (title, description, priority, name, id) => {
   const newToDoFile = new ToDoItem(title, description, priority, id);
   workplaceArray.forEach((element) => {
     if (element.workplaceName === name)
@@ -22,7 +22,7 @@ function createTodo(title, description, priority, name, id) {
   saveLocalStorage();
 }
 
-function removeTodo(name) {
+const removeTodo = (name) => {
   //declare todo names
   let idToDo = name.split("-");
   idToDo = idToDo[idToDo.length - 1];
@@ -57,12 +57,13 @@ function removeTodo(name) {
 }
 
 //modify to do
-function modifyToDo(name) {
+const modifyToDo = (name) => {
   const formModify = document.querySelector(".modify-form");
   formModify.style.cssText = "transform: translate(-50%, -50%) scale(1)";
   const btnCloseForm = document.querySelector(".modify-close-form");
-  btnCloseForm.addEventListener("click", closeModifyForm);
-  function closeModifyForm() {
+  btnCloseForm.addEventListener("click", () => closeModifyForm());
+
+  const closeModifyForm = () =>{
     formModify.style.cssText = "transform: translate(-50%, -50%) scale(0)";
   }
 
@@ -92,7 +93,7 @@ function modifyToDo(name) {
 
   const modifySubmitBtn = document.querySelector(".modify-submit-btn");
   modifySubmitBtn.addEventListener("click", () => {modifyInArray(), closeModifyForm()});
-  function modifyInArray() {
+  const modifyInArray = () => {
     workplaceArray.forEach((element) => {
       element.arrayForToDos.forEach((x) => {
         //multiple foreach to get into the 2 different arrays
@@ -101,9 +102,9 @@ function modifyToDo(name) {
           x.title = document.querySelector(".modify-text-title").value; 
           x.description = document.querySelector(".modify-text-description").value; 
           x.priority = document.querySelector(".modify-text-priority").value; 
-          toDoToModify.childNodes[0].textContent =  document.querySelector(".modify-text-title").value;
-          toDoToModify.childNodes[1].textContent =  document.querySelector(".modify-text-description").value;
-          toDoToModify.childNodes[2].textContent =  document.querySelector(".modify-text-priority").value;
+          toDoToModify.childNodes[0].textContent = document.querySelector(".modify-text-title").value;
+          toDoToModify.childNodes[1].textContent = document.querySelector(".modify-text-description").value;
+          toDoToModify.childNodes[2].textContent = document.querySelector(".modify-text-priority").value;
           saveLocalStorage();
             return;
         }
@@ -115,13 +116,13 @@ function modifyToDo(name) {
 //opening and closing the form to put to-do info
 const form = document.querySelector(".form-div");
 const btnCloseForm = document.querySelector(".close-form");
-btnCloseForm.addEventListener("click", closeForm);
+btnCloseForm.addEventListener("click", () => closeForm());
 
-function openForm() {
+const openForm = () => {
   form.style.cssText = "transform: translate(-50%, -50%) scale(1)";
 }
 
-function closeForm() {
+const closeForm = () => {
   form.style.cssText = "transform: translate(-50%, -50%) scale(0)";
 }
 

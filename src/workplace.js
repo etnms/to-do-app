@@ -1,5 +1,6 @@
-import { addFunctionsToButtons } from "./index.js";
-import { createWorkplaceUi, ToDoUI } from "./todo-ui.js";
+import { addFunctionsToButtons } from "./index";
+import { createWorkplaceUi, toDoUI } from "./todo-ui";
+import { removeFromListWorkPlace } from "./workplace-ui";
 
 let workplaceArray = [];
 
@@ -22,6 +23,21 @@ function workplaceName(name) {
   }
 }
 
+function removeWorkplace(name) {
+  const workplaceToRemove = document.querySelector(`#${name}`)
+  //need to slice to get only last part of the name
+  let workplaceName = name.split("-");
+  workplaceName = workplaceName[workplaceName.length - 1]; 
+
+  const removedArray = workplaceArray.filter(element => element.workplaceName !== workplaceName);
+  workplaceArray = removedArray;
+  
+  workplaceToRemove.remove();
+  removeFromListWorkPlace(workplaceName);
+
+  saveLocalStorage();
+}
+
 //local storage
 function saveLocalStorage() {
   localStorage.setItem("workplaces", JSON.stringify(workplaceArray));
@@ -32,10 +48,10 @@ function loadLocalStorage() {
   if (workplaceLoaded) {
     workplaceLoaded.forEach((element) => {
       workplaceArray.push(element);
-      createWorkplaceUi(element.workplaceName); 
-      element.arrayForToDos.forEach(x => { 
-        ToDoUI(x.title, x.description, x.priority,element.workplaceName,x.id)})
-        
+      createWorkplaceUi(element.workplaceName);
+      element.arrayForToDos.forEach((x) => {
+        toDoUI(x.title, x.description, x.priority, element.workplaceName, x.id);
+      });
     });
     addFunctionsToButtons();
   } else {
@@ -44,10 +60,16 @@ function loadLocalStorage() {
 }
 
 //reset the list for debugging purposes
-function reset(){
+function reset() {
   workplaceArray = [];
   saveLocalStorage();
 }
 //reset();
 
-export { workplaceName, workplaceArray, saveLocalStorage, loadLocalStorage };
+export {
+  workplaceName,
+  workplaceArray,
+  removeWorkplace,
+  saveLocalStorage,
+  loadLocalStorage,
+};

@@ -53,15 +53,34 @@ body {
   overflow: hidden;
 }
 
+p {
+  padding: 0.2em;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea{
+  resize: none;
+}
 .main {
   display: flex;
   height: 100vh;
 }
 
-/*Workplace form styling*/
-.workplace-form {
+.workplaces-wrapper {
   width: 20%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Workplace form styling*/
+.workplace-form {
+  width: 100%;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,29 +91,65 @@ body {
   margin: 0.5em;
 }
 
-#workplace-form-title,
+.list-workplaces {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1em;
+  padding: 1em;
+  overflow-y: scroll;
+  
+}
+
+.list-workplaces > button {
+  width: 75%;
+  word-wrap: break-word;
+  border: 0;
+  border-radius: 1em;
+  padding: 0.8rem;
+}
+
+.workplace-form-title,
 .btn-add-workplace,
-.btn-add-todo {
+.btn-add-todo,
+.btn-modify {
   border-radius: 2rem;
   width: 50%;
   border: 0;
-  height: 5%;
+  height: 10%;
   margin: 1rem;
   text-align: center;
   background-color: white;
 }
 
-.btn-add-workplace:hover,
-.btn-add-todo:hover {
-  background-color: rgba(255, 255, 255, 0.685);
-}
-#workplace-form-title {
+.workplace-form-title {
   width: 80%;
-  /*may want to add border-right*/
 }
 
-:placeholder-shown {
+.workplace-form-title::placeholder {
   font-style: italic;
+}
+
+.btn-modify {
+  box-sizing: border-box;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 0.5rem;
+  margin: 0;
+  padding: 0.35em;
+  cursor: pointer;
+}
+
+.btn-add-workplace:hover,
+.btn-add-todo:hover,
+.btn-modify:hover {
+  background-color: rgba(255, 255, 255, 0.685);
+}
+
+.btn-modify:hover {
+  transform: scale(1.1);
 }
 
 /*display of workplaces */
@@ -117,19 +172,47 @@ body {
   gap: 1em;
   flex-wrap: wrap;
   padding: 1em;
-  box-shadow: 0px 0px 12px 2px rgba(0,0,0,0.37);
+  box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.37);
+  position: relative;
 }
 
 /*button adding to do in workplace display */
 .btn-add-todo {
-  width: 10%;
-  height: auto;
-  padding: 0.5em;
+  border-radius: 100%;
+  font-size: 1.5em;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.2em 0.5em;
+  position: absolute;
+  left: 0.5;
+  bottom: 0;
+}
+
+.btn-add-todo:hover {
+  transform: scale(1.1);
+  transition: transform 200ms;
+}
+
+/*button removing the workplace and todos */
+.btn-remove-workplace,
+.btn-remove {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0.1em solid white;
+  color: white;
+  border-radius: 25%;
+  top: 0;
+  right: 0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 /* to do card inside each workplace*/
 .todo-display {
-  background-color: #757BC8;
+  background-color: #757bc8;
   box-shadow: 0px 0px 12px 3px #757ac8b7;
   height: 75%;
   width: 20%;
@@ -142,24 +225,25 @@ body {
   flex-wrap: wrap;
   padding: 1em;
   color: white;
+  position: relative;
 }
 
+.todo-title {
+  font-style: italic;
+  font-size: 1.4em;
+}
 .todo-display p {
   text-align: center;
   inline-size: 100%;
   overflow-wrap: break-word;
 }
 
-.todo-display button:hover{
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-/* inside to do cards */
-.btn-remove {
-  border-radius: 0.3em;
-  border: 0;
-  text-align: center;
-  padding: 1em;
+/*remove buttons on hover */
+.btn-remove:hover,
+.btn-remove-workplace:hover {
+  background-color: rgba(3, 3, 3, 0.829);
+  transform: scale(1.1);
+  transition: 0.2s ease-in-out;
 }
 
 /*form for to-dos*/
@@ -184,24 +268,29 @@ body {
   justify-content: center;
 }
 
-.form-add-to-do {
+.form-add-to-do,
+.form-modify-to-do {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .form-add-to-do input,
-.form-add-to-do textarea {
+.form-add-to-do textarea,
+.form-modify-to-do input,
+.form-modify-to-do textarea {
   height: 2.5em;
-  width: 250px;
+  width: 100%;
   border-radius: 10px;
   border: none;
   text-align: center;
   color: black;
-  font-size: 18px;
+  font-size: 1.2em;
 }
-.text-description {
+
+.text-description, .modify-text-description {
   height: 150px;
   width: 250px;
   text-align: center;
@@ -209,26 +298,33 @@ body {
 }
 
 .form-add-to-do input::placeholder,
-.form-add-to-do textarea::placeholder {
+.form-add-to-do textarea::placeholder,
+.form-modify-to-do input::placeholder,
+.form-modify-to-do::placeholder {
   color: black;
 }
 
 .form-add-to-do textarea,
-.form-add-to-do textarea::placeholder {
+.form-add-to-do textarea::placeholder,
+.form-modify-to-do textarea,
+.form-modify-to-do::placeholder {
   opacity: 1;
   font-weight: bold;
 }
 
-.form-add-to-do button {
+.form-add-to-do button,
+.form-modify-to-do button {
   border: 0;
   background-color: white;
   padding: 1em;
   border-radius: 10px;
-  width: 100px;
+  width: fit-content;
   font-weight: bold;
 }
 
-.form-add-to-do button:hover {
+
+.form-add-to-do button:hover,
+.form-modify-to-do button:hover {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -240,49 +336,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: hsla(236, 43%, 62%, 1);
-
-  background: linear-gradient(
-    270deg,
-    hsla(236, 43%, 62%, 1) 0%,
-    hsla(236, 57%, 68%, 1) 11.11111111111111%,
-    hsla(236, 79%, 75%, 1) 22.22222222222222%,
-    hsla(239, 100%, 81%, 1) 33.33333333333333%,
-    hsla(244, 100%, 83%, 1) 44.44444444444444%,
-    hsla(250, 100%, 84%, 1) 55.55555555555556%,
-    hsla(260, 97%, 85%, 1) 66.66666666666666%,
-    hsla(271, 92%, 85%, 1) 77.77777777777777%,
-    hsla(270, 91%, 86%, 1) 88.88888888888889%,
-    hsla(271, 90%, 88%, 1) 100%
-  );
-
-  background: -moz-linear-gradient(
-    270deg,
-    hsla(236, 43%, 62%, 1) 0%,
-    hsla(236, 57%, 68%, 1) 11.11111111111111%,
-    hsla(236, 79%, 75%, 1) 22.22222222222222%,
-    hsla(239, 100%, 81%, 1) 33.33333333333333%,
-    hsla(244, 100%, 83%, 1) 44.44444444444444%,
-    hsla(250, 100%, 84%, 1) 55.55555555555556%,
-    hsla(260, 97%, 85%, 1) 66.66666666666666%,
-    hsla(271, 92%, 85%, 1) 77.77777777777777%,
-    hsla(270, 91%, 86%, 1) 88.88888888888889%,
-    hsla(271, 90%, 88%, 1) 100%
-  );
-
-  background: -webkit-linear-gradient(
-    270deg,
-    hsla(236, 43%, 62%, 1) 0%,
-    hsla(236, 57%, 68%, 1) 11.11111111111111%,
-    hsla(236, 79%, 75%, 1) 22.22222222222222%,
-    hsla(239, 100%, 81%, 1) 33.33333333333333%,
-    hsla(244, 100%, 83%, 1) 44.44444444444444%,
-    hsla(250, 100%, 84%, 1) 55.55555555555556%,
-    hsla(260, 97%, 85%, 1) 66.66666666666666%,
-    hsla(271, 92%, 85%, 1) 77.77777777777777%,
-    hsla(270, 91%, 86%, 1) 88.88888888888889%,
-    hsla(271, 90%, 88%, 1) 100%
-  );
+  background: transparent;
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#757bc8", endColorstr="#8187dc", GradientType=1 );
 

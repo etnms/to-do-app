@@ -6,7 +6,7 @@ import { createToDoUI } from "./todo-ui.js";
 //button to create a workplace
 const btnAddWorkplace = document.querySelector(".btn-add-workplace");
 btnAddWorkplace.addEventListener("click", () => {
-  let name = document.querySelector("#workplace-form-title").value;
+  let name = document.querySelector(".workplace-form-title").value;
   workplaceName(name);
   addFunctionsToButtons();
 });
@@ -23,10 +23,10 @@ const addFunctionsToButtons = () => {
 };
 
 const submitBtn = document.querySelector(".submit-btn");
-submitBtn.addEventListener("click", () => createToDoUI(btnName, Math.floor(Math.random() * 100000)));
+submitBtn.addEventListener("click", () => createToDoUI(btnName, Math.floor(Math.random() * 1000000)));
 
 let btnName;
-function getNameOfBtn(name) {
+const getNameOfBtn = (name) =>{
   btnName = name;
 }
 

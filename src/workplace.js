@@ -1,9 +1,9 @@
-import { addFunctionsToButtons } from "./index";
-import { createWorkplaceUi, toDoUI } from "./todo-ui";
-import { removeFromListWorkPlace } from "./workplace-ui";
+import { createWorkplaceUi } from "./todo-ui";
+import { removeFromListWorkPlace, displayWorkplaceList, clearDisplay } from "./workplace-ui";
 
 let workplaceArray = [];
 
+//constructor for workplaces
 function workplace(workplaceName, arrayForToDos) {
   this.workplaceName = workplaceName;
   this.arrayForToDos = arrayForToDos;
@@ -18,6 +18,9 @@ function workplaceName(name) {
       return;
 
     workplaceArray.push(newWorkPlace);
+
+    displayWorkplaceList(name);
+    clearDisplay();
     createWorkplaceUi(name);
     saveLocalStorage();
   }
@@ -48,12 +51,8 @@ function loadLocalStorage() {
   if (workplaceLoaded) {
     workplaceLoaded.forEach((element) => {
       workplaceArray.push(element);
-      createWorkplaceUi(element.workplaceName);
-      element.arrayForToDos.forEach((x) => {
-        toDoUI(x.title, x.description, x.priority, element.workplaceName, x.id);
-      });
+      displayWorkplaceList(element.workplaceName);
     });
-    addFunctionsToButtons();
   } else {
     workplaceArray = [];
   }

@@ -1,34 +1,11 @@
 import { createTodo, removeTodo, modifyToDo } from "./todo";
-import { removeWorkplace } from "./workplace";
-import { displayWorkplaceList } from "./workplace-ui";
+import { createWorkplaceUi, tmpBtnName } from "./workplace-ui";
 
-const classDisplay = document.querySelector(".class-display");
-
-//const btnAdd = document.querySelector(".button-add-todo");
-const createWorkplaceUi = (name) => {
-  //create the workplace
-  const workplaceDisplay = document.createElement("div");
-  workplaceDisplay.classList = "workplace-display";
-  workplaceDisplay.setAttribute("id", `workplace-display-${name}`);
-
-  //button to add to dos inside workplace
-  const btnAddToDoWorkplace = document.createElement("button");
-  btnAddToDoWorkplace.classList = "btn-add-todo";
-  btnAddToDoWorkplace.textContent = "+";
-  workplaceDisplay.append(btnAddToDoWorkplace);
-
-  //buttons to remove workplace
-  const btnRemoveWorkplace = document.createElement("button");
-  btnRemoveWorkplace.classList = "btn-remove-workplace";
-  btnRemoveWorkplace.textContent = "X";
-  workplaceDisplay.append(btnRemoveWorkplace);
-  btnRemoveWorkplace.addEventListener("click", () => {
-    removeWorkplace(btnRemoveWorkplace.parentElement.id);
-  });
-  //append workplace
-  classDisplay.append(workplaceDisplay);
-  displayWorkplaceList(name);
-};
+//update name for submit form -> independant form that needs to know the name of the to do
+const submitBtn = document.querySelector(".submit-btn");
+submitBtn.addEventListener("click", () =>
+  createToDoUI(tmpBtnName, Math.floor(Math.random() * 1000000))
+);
 
 //create the to do display
 const createToDoUI = (name, rdn) => {
@@ -70,7 +47,6 @@ const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
 
   //creating modify to-do button
   const btnModify = document.createElement("img");
-  //btnModify.textContent = "modify";
   btnModify.src = "../src/icons/pen.svg";
   btnModify.classList = "btn-modify";
   btnModify.addEventListener("click", () =>
@@ -79,13 +55,13 @@ const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
   toDo.append(btnModify);
 
   //create the remove button inside the todos
-  const btnRemove = document.createElement("button");
+  const btnRemove = document.createElement("img");
+  btnRemove.src = "../src/icons/trash.svg";
   btnRemove.classList = "btn-remove";
-  btnRemove.textContent = "X";
-  toDo.append(btnRemove);
   btnRemove.addEventListener("click", () =>
     removeTodo(btnRemove.parentElement.id)
   );
+  toDo.append(btnRemove);
   currentToDo.append(toDo);
 };
 

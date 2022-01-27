@@ -11,7 +11,7 @@ function workplace(workplaceName, arrayForToDos) {
 
 function workplaceName(name) {
   //need to see if array already contains an element with this name
-  if (name != "") {
+  if (name !== "") {
     let arrayForToDos = [];
     const newWorkPlace = new workplace(name, arrayForToDos);
     if (workplaceArray.some((element) => element.workplaceName === name))

@@ -140,4 +140,4 @@ const closeForm = () => {
   form.style.cssText = "transform: translate(-50%, -50%) scale(0)";
 };
 
-export { createTodo, removeTodo, openForm, modifyToDo };
+export { createTodo, removeTodo, openForm, closeForm, modifyToDo };

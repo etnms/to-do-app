@@ -1,5 +1,7 @@
 import { createTodo, removeTodo, modifyToDo } from "./todo";
 import { createWorkplaceUi, tmpBtnName } from "./workplace-ui";
+import pen from "../src/icons/pen.svg";
+import trash from "../src/icons/trash.svg";
 
 //update name for submit form -> independant form that needs to know the name of the to do
 const submitBtn = document.querySelector(".submit-btn");
@@ -47,7 +49,7 @@ const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
 
   //creating modify to-do button
   const btnModify = document.createElement("img");
-  btnModify.src = "../src/icons/pen.svg";
+  btnModify.src = pen;
   btnModify.classList = "btn-modify";
   btnModify.addEventListener("click", () =>
     modifyToDo(btnModify.parentElement.id)
@@ -56,7 +58,7 @@ const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
 
   //create the remove button inside the todos
   const btnRemove = document.createElement("img");
-  btnRemove.src = "../src/icons/trash.svg";
+  btnRemove.src = trash;
   btnRemove.classList = "btn-remove";
   btnRemove.addEventListener("click", () =>
     removeTodo(btnRemove.parentElement.id)

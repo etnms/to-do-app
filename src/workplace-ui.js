@@ -1,4 +1,4 @@
-import {openForm} from "./todo";
+import {openForm, closeForm} from "./todo";
 import { toDoUI } from "./todo-ui";
 import { workplaceArray, removeWorkplace, workplaceName } from "./workplace";
 
@@ -49,6 +49,7 @@ const removeFromListWorkPlace = (name) => {
 };
 
 const clearDisplay = () => {
+  closeForm();
   const display = document.querySelector(".class-display");
   while (display.firstChild)
       display.removeChild(display.firstChild);
@@ -105,7 +106,8 @@ btnAddWorkplace.addEventListener("click", () => {
   workplaceName(name);
   removeColorBtns();
   const newBtn = document.querySelector(`#workplace-list-btn-${name}`)
-  newBtn.classList.toggle("active");
+  if (name !== "")
+    newBtn.classList.toggle("active");
 
   //reset input to nothing
   document.querySelector(".workplace-form-title").value = "";

@@ -96,7 +96,7 @@ const modifyToDo = (name) => {
 
 const modifySubmitBtn = document.querySelector(".modify-submit-btn");
 modifySubmitBtn.addEventListener("click", () => {
-  modifyInArray(idToDo, toDoToModify), closeModifyForm(), console.log("ble");
+  modifyInArray(idToDo, toDoToModify), closeModifyForm();
 });
 
 const modifyInArray = (idToDo, toDoToModify) => {

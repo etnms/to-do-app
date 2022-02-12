@@ -1,4 +1,7 @@
 import "./style.css";
-import { loadLocalStorage } from "./workplace.js";
+import { loadData } from "./workplace";
+import * as firebase from "./firebaseSave";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-loadLocalStorage();
+// Every functions can be found in other files,
+// index is used to tie them together

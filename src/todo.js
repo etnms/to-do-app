@@ -1,12 +1,4 @@
-import { workplaceArray, saveLocalStorage } from "./workplace";
-
-//constructor for the to dos
-function ToDoItem(title, description, priority, id) {
-  this.title = title;
-  this.description = description;
-  this.priority = priority;
-  this.id = id;
-}
+import { workplaceArray, saveData } from "./workplace";
 
 //declare variables to use in different files
 let idToDo;
@@ -14,15 +6,18 @@ let toDoToModify;
 const formModify = document.querySelector(".modify-form");
 
 const createTodo = (title, description, priority, name, id) => {
-  const newToDoFile = new ToDoItem(title, description, priority, id);
+  //const newToDoFile = new ToDoItem(title, description, priority, id);
   workplaceArray.forEach((element) => {
     if (element.workplaceName === name)
-      workplaceArray[workplaceArray.indexOf(element)].arrayForToDos.push(
-        newToDoFile
-      );
+      workplaceArray[workplaceArray.indexOf(element)].arrayForToDos.push({
+        title: title,
+        description: description,
+        priority: priority,
+        id: id,
+      });
   });
   closeForm();
-  saveLocalStorage();
+  saveData();
 };
 
 const removeTodo = (name) => {
@@ -31,8 +26,10 @@ const removeTodo = (name) => {
   idToDo = idToDo[idToDo.length - 1];
 
   //get workplacename
-  let toDoToRemove = document.querySelector(`#${name}`);
-  let tempWorkplaceName = toDoToRemove.parentElement.id.split("-"); //need to slice to get only last part of the name
+  const toDoToRemove = document.querySelector(`[data-id="${name}"]`);
+  let tempWorkplaceName = toDoToRemove.parentElement
+    .getAttribute("data-id")
+    .split("-"); //need to slice to get only last part of the name
   tempWorkplaceName = tempWorkplaceName[tempWorkplaceName.length - 1];
 
   //removing from divs
@@ -50,7 +47,7 @@ const removeTodo = (name) => {
               element.arrayForToDos.indexOf(x),
               1
             );
-            saveLocalStorage();
+            saveData();
             return;
           }
         }
@@ -77,7 +74,7 @@ const modifyToDo = (name) => {
   idToDo = name.split("-");
   idToDo = idToDo[idToDo.length - 1];
   //get workplacename
-  toDoToModify = document.querySelector(`#${name}`);
+  toDoToModify = document.querySelector(`[data-id="${name}"]`);
   let tempWorkplaceName = toDoToModify.parentElement.id.split("-"); //need to slice to get only last part of the name
   tempWorkplaceName = tempWorkplaceName[tempWorkplaceName.length - 1];
 
@@ -101,11 +98,9 @@ modifySubmitBtn.addEventListener("click", () => {
 
 const modifyInArray = (idToDo, toDoToModify) => {
   workplaceArray.forEach((element) => {
-    console.log(element);
     element.arrayForToDos.forEach((x) => {
       //multiple foreach to get into the 2 different arrays
       if (x.id.toString() === idToDo) {
-        console.log(workplaceArray);
         //for loop in order to get the name of workplacearray, necessary to delete inside correct array
         x.title = document.querySelector(".modify-text-title").value;
         x.description = document.querySelector(
@@ -117,10 +112,9 @@ const modifyInArray = (idToDo, toDoToModify) => {
         toDoToModify.childNodes[1].textContent = document.querySelector(
           ".modify-text-description"
         ).value;
-        toDoToModify.childNodes[2].textContent = document.querySelector(
-          ".modify-text-priority"
-        ).value;
-        saveLocalStorage();
+        toDoToModify.childNodes[2].textContent =
+          "Priority: " + document.querySelector(".modify-text-priority").value;
+        saveData();
         return;
       }
     });

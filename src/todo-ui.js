@@ -5,9 +5,9 @@ import trash from "../src/icons/trash.svg";
 
 //update name for submit form -> independant form that needs to know the name of the to do
 const submitBtn = document.querySelector(".submit-btn");
-submitBtn.addEventListener("click", () =>
-  createToDoUI(tmpBtnName, Math.floor(Math.random() * 1000000))
-);
+submitBtn.addEventListener("click", () => {
+  createToDoUI(tmpBtnName, Math.floor(Math.random() * 1000000));
+});
 
 //create the to do display
 const createToDoUI = (name, rdn) => {
@@ -23,13 +23,21 @@ const createToDoUI = (name, rdn) => {
   //creating the content of the to dos
   createTodo(title, description, priority, nameForArray, rdn);
   toDoUI(title, description, priority, nameForArray, rdn);
+
+  //reset values on the to do form for next one
+  document.querySelector(".text-title").value = "";
+  document.querySelector(".text-description").value = "";
+  document.querySelector(".text-priority").value = "";
 };
 
 const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
-  let currentToDo = document.querySelector(`#workplace-display-${name}`);
+  let currentToDo = document.querySelector(
+    `[data-id="workplace-display-${name}"]`
+  );
   const toDo = document.createElement("div");
   toDo.classList = "todo-display";
-  toDo.setAttribute("id", `todo-item-${rdn}`);
+  toDo.setAttribute("data-id", `todo-item-${rdn}`);
+
   //creating the content of the to dos
   const title = titleTodo;
   const description = descriptionTodo;
@@ -42,28 +50,32 @@ const toDoUI = (titleTodo, descriptionTodo, priorityTodo, name, rdn) => {
   const descriptionText = document.createElement("p");
   descriptionText.textContent = description;
   const priorityText = document.createElement("p");
-  priorityText.textContent = priority;
+  priorityText.textContent = "Priority: " + priority;
+
   toDo.append(titleText);
   toDo.append(descriptionText);
   toDo.append(priorityText);
 
   //creating modify to-do button
+  const wrapperBtns = document.createElement("span");
+  wrapperBtns.classList = "wrapper-btns-todos";
   const btnModify = document.createElement("img");
   btnModify.src = pen;
   btnModify.classList = "btn-modify";
   btnModify.addEventListener("click", () =>
-    modifyToDo(btnModify.parentElement.id)
+    modifyToDo(btnModify.parentElement.parentElement.getAttribute("data-id"))
   );
-  toDo.append(btnModify);
+  wrapperBtns.append(btnModify);
 
   //create the remove button inside the todos
   const btnRemove = document.createElement("img");
   btnRemove.src = trash;
   btnRemove.classList = "btn-remove";
   btnRemove.addEventListener("click", () =>
-    removeTodo(btnRemove.parentElement.id)
+    removeTodo(btnRemove.parentElement.parentElement.getAttribute("data-id"))
   );
-  toDo.append(btnRemove);
+  wrapperBtns.append(btnRemove);
+  toDo.append(wrapperBtns);
   currentToDo.append(toDo);
 };
 

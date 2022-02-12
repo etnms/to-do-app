@@ -53,9 +53,11 @@ body {
   overflow: hidden;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: white;
 }
+
 p {
   padding: 0.2em;
   margin: 0;
@@ -65,20 +67,75 @@ button {
   cursor: pointer;
 }
 
-textarea{
+textarea {
   resize: none;
   min-height: 4em;
 }
 
+header {
+  display: flex;
+  height: 8vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-user {
+  color: white;
+  font-size: 1.2em;
+  display: none;
+}
+
+.brand-title {
+  color: white;
+  margin: 0 1.5em;
+  background-color: rgba(46, 46, 46, 0.5);
+  padding: 0.1em 0.2em;
+  border-radius: 0.3em;
+  cursor: default;
+}
+/*login and sign up buttons */
+.wrapper-log > button {
+  margin: 0.5em 1em;
+  padding: 0.4em 1em;
+  font-size: 1.1em;
+  border-radius: 0.3em;
+  border: none;
+}
+
+.btn-login {
+  background-color: white;
+}
+
+.btn-sign-up,
+.btn-sign-out {
+  background-color: #3d5eb0;
+  color: white;
+}
+
+.btn-sign-out {
+  display: none;
+}
+
+.btn-login:hover,
+.btn-sign-up:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+
+.title-connect {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
 .main {
   display: flex;
-  height: 100vh;
+  height: 92vh;
 }
 
 /*wrapper for left part of the app: list and new workplaces*/
 .workplaces-wrapper {
   width: 20%;
-  height: 100vh;
+  height: 92vh;
   display: flex;
   flex-direction: column;
 }
@@ -96,9 +153,14 @@ textarea{
   color: white;
   margin: 0.5em;
 }
+
 /*list workplaces*/
+
+.workplace-list-title {
+  text-align: center;
+}
 .list-workplaces {
-  height: 50vh;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,7 +168,6 @@ textarea{
   gap: 1em;
   padding: 1em;
   overflow-y: scroll;
-  
 }
 
 .list-workplaces > button {
@@ -119,19 +180,18 @@ textarea{
 
 .btn-list-workplaces {
   background-color: white;
-
 }
 /*active class for buttons*/
-.active{
-  background-color: #5E69CC;
+.active {
+  background-color: #5e69cc;
   color: white;
 }
 
 .btn-list-workplaces:hover {
-  background-color:rgb(224, 224, 224) ;
+  background-color: rgb(224, 224, 224);
 }
 
-.active:hover{
+.active:hover {
   background-color: #535db4;
 }
 
@@ -145,14 +205,16 @@ textarea{
   border-radius: 2rem;
   width: 50%;
   border: 0;
-  height: 10%;
+  height: 13%;
   margin: 1rem;
   text-align: center;
   background-color: white;
 }
+
 /*form workplace */
 .workplace-form-title {
   width: 80%;
+  font-size: 95%;
 }
 
 .workplace-form-title::placeholder {
@@ -160,7 +222,8 @@ textarea{
 }
 
 /*same style for multiple buttons*/
-.btn-modify, .btn-remove {
+.btn-modify,
+.btn-remove {
   box-sizing: border-box;
   width: 1.7em;
   height: 1.7em;
@@ -174,11 +237,12 @@ textarea{
 .btn-add-todo:hover,
 .btn-modify:hover,
 .btn-remove:hover,
-.btn-remove-workplace:hover{
+.btn-remove-workplace:hover {
   background-color: rgba(255, 255, 255, 0.685);
 }
 
-.btn-modify:hover, .btn-remove:hover {
+.btn-modify:hover,
+.btn-remove:hover {
   transform: scale(1.1);
 }
 
@@ -204,6 +268,18 @@ textarea{
   padding: 3.5em 1em;
   box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.37);
   position: relative;
+  animation: opening 350ms ease-in-out;
+}
+/* animation for appearing on screen */
+@keyframes opening {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
 }
 
 /*button adding to do in workplace display */
@@ -213,22 +289,23 @@ textarea{
   width: fit-content;
   height: fit-content;
   padding: 0.2em 0.5em;
-  position: absolute;  
+  position: absolute;
   left: 90%;
   bottom: 0;
 }
 
-.btn-remove-workplace{
+.btn-remove-workplace {
   font-size: 1em;
   width: fit-content;
   height: fit-content;
   padding: 0.5em 0.8em;
-  position: absolute;  
+  position: absolute;
   left: 68%;
   bottom: 0%;
 }
 
-.btn-add-todo:hover, .btn-remove-workplace:hover {
+.btn-add-todo:hover,
+.btn-remove-workplace:hover {
   transform: scale(1.1);
   transition: transform 200ms;
 }
@@ -282,7 +359,7 @@ textarea{
 .btn-close-workplace:hover {
   background-color: rgba(3, 3, 3, 0.829);
   transform: scale(1.1);
-  transition: 0.2s ease-in-out;
+  transition: 200ms ease-in-out;
 }
 
 /*form for to-dos*/
@@ -295,9 +372,9 @@ textarea{
   height: 60%;
   width: 20%;
   padding: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.678);
+  border: 2px solid #ffffffea;
   border-radius: 4px;
-  background-color: #60616e;
+  background-color: #393939;
   text-align: center;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
@@ -309,7 +386,8 @@ textarea{
 
 /*form for the to dos*/
 .form-add-to-do,
-.form-modify-to-do {
+.form-modify-to-do,
+.connect-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -317,20 +395,32 @@ textarea{
   height: 100%;
 }
 
+/* login and signup form */
+.connect-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  gap: 1em;
+}
+
 .form-add-to-do input,
 .form-add-to-do textarea,
 .form-modify-to-do input,
-.form-modify-to-do textarea {
+.form-modify-to-do textarea,
+.connect-form input {
   height: 2.5em;
   width: 100%;
   border-radius: 10px;
   border: none;
   text-align: center;
   color: black;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
-.text-description, .modify-text-description {
+.text-description,
+.modify-text-description {
   height: 150px;
   width: 250px;
   text-align: center;
@@ -340,7 +430,8 @@ textarea{
 .form-add-to-do input::placeholder,
 .form-add-to-do textarea::placeholder,
 .form-modify-to-do input::placeholder,
-.form-modify-to-do::placeholder {
+.form-modify-to-do::placeholder,
+.connect-form input::placeholder {
   color: black;
 }
 
@@ -353,7 +444,8 @@ textarea{
 }
 
 .form-add-to-do button,
-.form-modify-to-do button {
+.form-modify-to-do button,
+.connect-form button {
   border: 0;
   background-color: white;
   padding: 1em;
@@ -362,13 +454,77 @@ textarea{
   font-weight: bold;
 }
 
-
 .form-add-to-do button:hover,
-.form-modify-to-do button:hover {
+.form-modify-to-do button:hover,
+.connect-form button:hover {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
+.connect-form input {
+  font-style: italic;
+}
+
+.submit-connect-btn {
+  color: white !important;
+  font-style: normal !important;
+  height: auto;
+  width: 60%;
+  padding: 0.5em;
+  cursor: pointer !important;
+  background-color: #3d5eb0;
+}
+
+.submit-connect-btn {
+  background-color: #426ad1;
+}
+
+/* delete confirmation */
+.delete-confirmation-div{
+  position: fixed;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  height: 12vh;
+  width: auto;
+  background-color: #393939;
+  border-radius: 2em;
+  border: 3px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  transition: 0.2s ease-in-out;
+}
+
+.delete-confirmation-div>p{
+  color: white;
+}
+
+.wrapper-btn-confirmation>button{
+  margin: 0.5em;
+  height: 2.5em;
+  width: 7em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.3em;
+  background-color:white;
+  color: black;
+}
+
+.wrapper-btn-confirmation>button:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+
+.btn-confirm-close{
+  background-color: #AB3F29 !important;
+  color: white !important;
+}
+
 /* scrollbars */
+
 /* width */
 ::-webkit-scrollbar {
   width: 0.7em;

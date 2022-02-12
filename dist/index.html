@@ -10,16 +10,25 @@
     <title>To Do app</title>
   </head>
   <body>
+    <header>
+      <h1 class="brand-title">Memento - To do app</h1>
+      <div class="wrapper-log">
+        <span class="welcome-user"></span>
+        <button class="btn-login">Log In</button>
+        <button class="btn-sign-up">Sign Up</button>
+        <button class="btn-sign-out">Sign Out</button>      
+      </div>
+    </header>
     <main class="main">
       <div class="workplaces-wrapper">
       <div class="workplace-form">
           <h1>Create a new workplace</h1>
-          <input type="text" class="workplace-form-title" placeholder="Workplace title"/></form> <br>
-
+          <input type="text" class="workplace-form-title" placeholder="Workplace title"/></form>
           <button class="btn-add-workplace">Add</button>
       </div>
+      <h2 class="workplace-list-title">Current workplaces</h2>
       <div class="list-workplaces">
-        <h2>Current workplaces</h2>
+       
       </div>
     </div>
       <div class="class-display"></div>
@@ -46,5 +55,29 @@
         <button type="button" class="modify-close-form">Close</button>
       </form>
     </div>
+    <form class="form-div sign-up-form connect-form">
+        <h2 class="title-connect">Sign Up</h2>
+        <input type="text" placeholder="Username" id="username-signup">
+        <input type="email" placeholder="Email address" id="email-signup">
+        <input type="password" placeholder="Password" id="password-signup">
+        <button type="button" class="btn-close-signup">Close</button>
+        <input type="submit" value="Create account"  class="submit-connect-btn">
+    </form>
+
+    <form class="form-div login-form connect-form">
+      <h2 class="title-connect">Log In</h2>
+      <input type="email" placeholder="Email address" id="email-login">
+      <input type="password" placeholder="Password" id="password-login">
+      <button type="button" class="btn-close-login">Close</button>
+      <input type="submit" value="Log In" class="submit-connect-btn">
+  </form>
+  <div class="delete-confirmation-div">
+    <p> Are you sure you want to delete this workplace?</p>
+    <span class="wrapper-btn-confirmation">
+      <button class="btn-confirm-close">Yes</button>
+    <button class="btn-cancel-close">No</button>
+    </span>
+    
+  </div>
   </body>
 </html>

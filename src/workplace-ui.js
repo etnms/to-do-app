@@ -10,7 +10,7 @@ let tmpBtnName;
 const displayWorkplaceList = (name) => {
   const workplaceEl = document.createElement("button");
   workplaceEl.classList = "btn-list-workplaces";
-  workplaceEl.id = `workplace-list-btn-${name}`;
+  workplaceEl.setAttribute("data-id", `workplace-list-btn-${name}`);
   workplaceEl.textContent = name;
   workplaceList.append(workplaceEl);
 
@@ -38,7 +38,9 @@ const removeColorBtns = () => {
 };
 
 const removeFromListWorkPlace = (name) => {
-  const btnToRemove = document.querySelector(`#workplace-list-btn-${name}`);
+  const btnToRemove = document.querySelector(
+    `[data-id="workplace-list-btn-${name}"]`
+  );
   btnToRemove.remove();
 };
 
@@ -48,12 +50,17 @@ const clearDisplay = () => {
   while (display.firstChild) display.removeChild(display.firstChild);
 };
 
+const clearList = () => {
+  const list = document.querySelector(".list-workplaces");
+  while (list.firstChild) list.removeChild(list.firstChild);
+};
+
 const createWorkplaceUi = (name) => {
   clearDisplay();
   //create the workplace
   const workplaceDisplay = document.createElement("div");
   workplaceDisplay.classList = "workplace-display";
-  workplaceDisplay.setAttribute("id", `workplace-display-${name}`);
+  workplaceDisplay.setAttribute("data-id", `workplace-display-${name}`);
 
   //button to add to dos inside workplace
   const btnAddToDoWorkplace = document.createElement("button");
@@ -65,7 +72,7 @@ const createWorkplaceUi = (name) => {
 
   const addFunctionsToButtons = (event) => {
     openForm();
-    tmpBtnName = event.target.parentElement.id;
+    tmpBtnName = event.target.parentElement.getAttribute("data-id");
   };
 
   workplaceDisplay.append(btnAddToDoWorkplace);
@@ -76,7 +83,7 @@ const createWorkplaceUi = (name) => {
   btnRemoveWorkplace.textContent = "Delete workplace";
   workplaceDisplay.append(btnRemoveWorkplace);
   btnRemoveWorkplace.addEventListener("click", () => {
-    removeWorkplace(btnRemoveWorkplace.parentElement.id);
+    removeWorkplace(btnRemoveWorkplace.parentElement.getAttribute("data-id"));
   });
 
   const btnCloseWorkplace = document.createElement("button");
@@ -95,23 +102,29 @@ const createWorkplaceUi = (name) => {
 const btnAddWorkplace = document.querySelector(".btn-add-workplace");
 btnAddWorkplace.addEventListener("click", () => {
   let name = document.querySelector(".workplace-form-title").value;
-  const test = document.querySelector(".workplace-form-title");
-  if (name ==="") {
-    test.setCustomValidity("You need to type a name!");
-    test.reportValidity();
+  const formTitle = document.querySelector(".workplace-form-title");
+  if (name === "") {
+    formTitle.setCustomValidity("You need to type a name!");
+    formTitle.reportValidity();
+    return;
   } else {
-    test.setCustomValidity("");
+    formTitle.setCustomValidity("");
   }
   //if input already exist opens the corresponding workplace
   workplaceArray.some((element) => {
-    if (element.workplaceName === name) {createWorkplaceUi(name), displayToDos(name);};
+    if (element.workplaceName === name) {
+      createWorkplaceUi(name), displayToDos(name);
+    }
   });
   // otherwise create a new workplace
   workplaceName(name);
   removeColorBtns();
-  const newBtn = document.querySelector(`#workplace-list-btn-${name}`);
+  const newBtn = document.querySelector(
+    `[data-id="workplace-list-btn-${name}"]`
+  );
+
   if (name !== "") newBtn.classList.toggle("active");
-  
+
   //reset input to empty value
   document.querySelector(".workplace-form-title").value = "";
 });
@@ -120,6 +133,7 @@ export {
   displayWorkplaceList,
   removeFromListWorkPlace,
   clearDisplay,
+  clearList,
   createWorkplaceUi,
   tmpBtnName,
 };

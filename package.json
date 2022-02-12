@@ -16,6 +16,7 @@
     "weebpack": "^1.0.1"
   },
   "dependencies": {
-    "firebase": "^9.6.5"
+    "firebase": "^9.6.5",
+    "package-lock-only": "^0.0.4"
   }
 }

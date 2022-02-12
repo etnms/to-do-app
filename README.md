@@ -6,5 +6,6 @@ This is a simple To do app made with Javascript, HTML, and CSS. The app is writt
 #### Local save and Firebase save
 The app uses local storage and firebase to save projects. In other words, you can create an account and log in to keep track of your workplaces and to dos, but you can also use the app without logging in. If you do so, your workplaces will be saved on your computer and won't be accessible from a different computer. Clearing your browser cache while using the local save will also reset delete your workplaces.
 
+## No responsive design at the moment (computer only)
 
 [here]:https://etnms.github.io/to-do-app/
